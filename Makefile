@@ -9,7 +9,7 @@ CFLAGS	= -Wall -Wextra -Werror -I includes
 AR		= ar rcs
 RM		= rm -f
 
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re test
 
 all: $(NAME)
 
@@ -19,10 +19,14 @@ $(NAME): $(OBJS)
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
+# Regra opcional para testar a biblioteca
+test: $(NAME)
+	$(CC) $(CFLAGS) main.c -L. -lft -o test
+
 clean:
 	$(RM) $(OBJS)
 
 fclean: clean
-	$(RM) $(NAME)
+	$(RM) $(NAME) test test.exe
 
 re: fclean all
