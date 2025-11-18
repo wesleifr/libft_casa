@@ -1,23 +1,27 @@
-# **************************************************************************** #
-#                                   LIBFT                                     #
-# **************************************************************************** #
-
 NAME = libft.a
-CC = cc
-CFLAGS = -Wall -Wextra -Werror
 
-SRC = $(wildcard *.c)
-OBJ = $(SRC:.c=.o)
+SRC_DIRS = parte1 parte2
+SRCS = $(foreach dir, $(SRC_DIRS), $(wildcard $(dir)/*.c))
+OBJS = $(SRCS:.c=.o)
+
+CC = gcc
+CFLAGS = -Wall -Wextra -Werror -I .
+RM = rm -f
 
 all: $(NAME)
 
-$(NAME): $(OBJ)
-	ar rcs $(NAME) $(OBJ)
+$(NAME): $(OBJS)
+	ar rcs $(NAME) $(OBJS)
+
+%.o: %.c libft.h
+	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	rm -f $(OBJ)
+	$(RM) $(OBJS)
 
 fclean: clean
-	rm -f $(NAME)
+	$(RM) $(NAME)
 
 re: fclean all
+
+.PHONY: all clean fclean re

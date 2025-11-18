@@ -1,4 +1,6 @@
-static size_t count_words(const char *s, char c)
+#include "libft.h"
+
+size_t count_words(const char *s, char c)
 {
 size_t cnt;
 int in;

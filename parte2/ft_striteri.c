@@ -1,12 +1,15 @@
-void ft_striteri(char *s, void (*f)(unsigned int, char *))
-{
-unsigned int i;
+#include "libft.h"
 
-
-i = 0;
-while (s[i])
+void	ft_striteri(char *s, void (*f)(unsigned int, char *))
 {
-f(i, &s[i]);
-i++;
-}
+	unsigned int	i;
+
+	if (!s || !f)
+		return ;
+	i = 0;
+	while (s[i])
+	{
+		f(i, &s[i]);
+		i++;
+	}
 }
