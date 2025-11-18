@@ -1,19 +1,22 @@
-NAME = libft.a
+NAME	= libft.a
 
-SRC_DIRS = parte1 parte2
-SRCS = $(foreach dir, $(SRC_DIRS), $(wildcard $(dir)/*.c))
-OBJS = $(SRCS:.c=.o)
+SRC_DIR	= srcs
+SRCS	= $(wildcard $(SRC_DIR)/*.c)
+OBJS	= $(SRCS:.c=.o)
 
-CC = gcc
-CFLAGS = -Wall -Wextra -Werror -I .
-RM = rm -f
+CC		= gcc
+CFLAGS	= -Wall -Wextra -Werror -I includes
+AR		= ar rcs
+RM		= rm -f
+
+.PHONY: all clean fclean re
 
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	ar rcs $(NAME) $(OBJS)
+	$(AR) $(NAME) $(OBJS)
 
-%.o: %.c libft.h
+%.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
@@ -23,5 +26,3 @@ fclean: clean
 	$(RM) $(NAME)
 
 re: fclean all
-
-.PHONY: all clean fclean re
